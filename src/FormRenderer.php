@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Form view for Yii3 framework
+ * @link      https://github.com/maileryio/yii-form
+ * @package   Mailery/Form
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2020, Mailery (https://mailery.io/)
+ */
+
 namespace Mailery\Form;
 
 use FormManager\Form;
@@ -8,7 +18,6 @@ use FormManager\Inputs\Submit;
 
 class FormRenderer
 {
-
     /**
      * @param Form $form
      * @param bool $showErrors
@@ -63,5 +72,4 @@ class FormRenderer
 
         return $form->getOpeningTag() . implode("\n", $rows) . $form->getClosingTag();
     }
-
 }
