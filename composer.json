@@ -1,16 +1,17 @@
 {
-    "name": "maileryio/_____",
+    "name": "maileryio/yii-form",
     "type": "library",
-    "description": "_____",
+    "description": "Form view for Yii3 framework",
     "keywords": [
-        "_____"
+        "yii",
+        "form"
     ],
-    "homepage": "https://github.com/maileryio/_____",
+    "homepage": "https://github.com/maileryio/yii-form",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/maileryio/_____",
-        "issues": "https://github.com/maileryio/_____/issues",
-        "wiki": "https://github.com/maileryio/_____/wiki"
+        "source": "https://github.com/maileryio/yii-form",
+        "issues": "https://github.com/maileryio/yii-form/issues",
+        "wiki": "https://github.com/maileryio/yii-form/wiki"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -24,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mailery\\_____\\": "src"
+            "Mailery\\Form\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mailery\\_____\\Tests\\": "tests"
+            "Mailery\\Form\\Tests\\": "tests"
         }
     },
     "scripts": {
