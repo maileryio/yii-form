@@ -21,7 +21,9 @@
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "phan/phan": "^2.4",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "form-manager/form-manager": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "symfony/validator": "^4.4"
     },
     "autoload": {
         "psr-4": {

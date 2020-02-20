@@ -44,7 +44,7 @@ class FormRenderer
                 }
 
                 $template = strtr(
-                    '<div class="form-group row"><div class="col-sm-3 col-form-label">{{ label }}</div> <div class="col-sm-9">{{ input }} {{ error }}</div></div>',
+                    '<div class="form-group row"><div class="col-sm-4 col-form-label">{{ label }}</div> <div class="col-sm-8">{{ input }} {{ error }}</div></div>',
                     $placeholders
                 );
             }
@@ -54,7 +54,7 @@ class FormRenderer
                 ->setAttribute('class', implode(' ', $cssClasses));
 
             $rows[] = strtr(
-                '<div class="row"><div class="col-md-6">{input}</div></div>',
+                '<div class="row"><div class="col-md-12">{input}</div></div>',
                 [
                     '{input}' => $input,
                 ]
