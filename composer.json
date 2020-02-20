@@ -1,17 +1,18 @@
 {
-    "name": "maileryio/yii-form",
+    "name": "maileryio/widget-form",
     "type": "library",
-    "description": "Form view for Yii3 framework",
+    "description": "Form Widget for Mailery Platform",
     "keywords": [
         "yii",
+        "widget",
         "form"
     ],
-    "homepage": "https://github.com/maileryio/yii-form",
+    "homepage": "https://github.com/maileryio/widget-form",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/maileryio/yii-form",
-        "issues": "https://github.com/maileryio/yii-form/issues",
-        "wiki": "https://github.com/maileryio/yii-form/wiki"
+        "source": "https://github.com/maileryio/widget-form",
+        "issues": "https://github.com/maileryio/widget-form/issues",
+        "wiki": "https://github.com/maileryio/widget-form/wiki"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -27,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mailery\\Form\\": "src"
+            "Mailery\\Widget\\Form\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mailery\\Form\\Tests\\": "tests"
+            "Mailery\\Widget\\Form\\Tests\\": "tests"
         }
     },
     "scripts": {

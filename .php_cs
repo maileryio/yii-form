@@ -2,9 +2,9 @@
 
 $date = date('Y');
 $header = <<<EOF
-Form view for Yii3 framework
-@link      https://github.com/maileryio/yii-form
-@package   Mailery/Form
+Form Widget for Mailery Platform
+@link      https://github.com/maileryio/widget-form
+@package   Mailery\Widget\Form
 @license   BSD-3-Clause
 @copyright Copyright (c) {$date}, Mailery (https://mailery.io/)
 EOF;

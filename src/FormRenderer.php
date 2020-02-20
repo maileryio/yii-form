@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 /**
- * Form view for Yii3 framework
- * @link      https://github.com/maileryio/yii-form
+ * Form Widget for Mailery Platform
+ * @link      https://github.com/maileryio/widget-form
  * @package   Mailery/Form
  * @license   BSD-3-Clause
  * @copyright Copyright (c) 2020, Mailery (https://mailery.io/)
  */
 
-namespace Mailery\Form;
+namespace Mailery\Widget\Form;
 
 use FormManager\Form;
 use FormManager\Inputs\Input;
