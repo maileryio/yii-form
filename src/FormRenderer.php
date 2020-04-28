@@ -13,54 +13,47 @@ declare(strict_types=1);
 namespace Mailery\Widget\Form;
 
 use FormManager\Form;
-use FormManager\Inputs\Input;
-use FormManager\Inputs\Submit;
 
 class FormRenderer
 {
+    const NAMESPACES = [
+        'Mailery\\Widget\\Form\\Renderers\\',
+    ];
+
+    /**
+     * @var Form
+     */
+    private Form $form;
+
     /**
      * @param Form $form
+     */
+    public function __construct(Form $form)
+    {
+        $this->form = $form;
+    }
+
+    /**
      * @param bool $showErrors
      * @return string
      */
-    public function __invoke(Form $form, bool $showErrors): string
+    public function __invoke(bool $showErrors): string
     {
         $rows = [];
+        foreach ($this->form as $input) {
+            $inputRenderer = null;
+            foreach (self::NAMESPACES as $namespace) {
+                $name = (new \ReflectionClass($input))->getShortName();
+                $class = $namespace.$name;
 
-        foreach ($form as $input) {
-            /* @var $input Input */
-            $input = clone $input;
-
-            if ($input instanceof Submit) {
-                $cssClasses = [
-                    'btn',
-                    'btn-primary',
-                    'float-right',
-                    'mt-2',
-                ];
-                $template = '{{ template }}';
-            } else {
-                $cssClasses = [
-                    'form-control',
-                ];
-                $placeholders = [
-                    '{{ error }}' => '',
-                ];
-
-                if ($showErrors && ($error = $input->getError()) !== null) {
-                    $cssClasses[] = 'form-control-danger';
-                    $placeholders['{{ error }}'] = '<div class="error mt-2 text-danger">' . $error . '</div>';
+                if (class_exists($class)) {
+                    $inputRenderer = new $class($input);
                 }
-
-                $template = strtr(
-                    '<div class="form-group row"><div class="col-sm-4 col-form-label">{{ label }}</div> <div class="col-sm-8">{{ input }} {{ error }}</div></div>',
-                    $placeholders
-                );
             }
 
-            $input
-                ->setTemplate($template)
-                ->setAttribute('class', implode(' ', $cssClasses));
+            if ($inputRenderer !== null) {
+                $input = $inputRenderer($showErrors);
+            }
 
             $rows[] = strtr(
                 '<div class="row"><div class="col-md-12">{input}</div></div>',
@@ -70,6 +63,8 @@ class FormRenderer
             );
         }
 
-        return $form->getOpeningTag() . implode("\n", $rows) . $form->getClosingTag();
+        return $this->form->getOpeningTag()
+            . implode("\n", $rows)
+            . $this->form->getClosingTag();
     }
 }
