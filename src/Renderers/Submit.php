@@ -20,8 +20,16 @@ class Submit extends Input
      */
     public function __invoke(bool $showErrors): string
     {
-        return $this->input
-            ->setTemplate('{{ template }}')
+        if ($showErrors && ($error = $this->input->getError()) !== null) {
+            $error = '<div class="error mt-2 text-danger">' . $error . '</div>';
+        } else {
+            $error = '';
+        }
+
+        $template = '{{ template }} ' . $error;
+
+        return (string) $this->input
+            ->setTemplate($template)
             ->setAttribute('class', 'btn btn-primary float-right mt-2');
     }
 }

@@ -17,12 +17,12 @@ use FormManager\Groups\RadioGroup as FormRadioGroup;
 class RadioGroup extends FormRadioGroup
 {
     /**
-     * @var string
+     * @var string|null
      */
     private ?string $label = null;
 
     /**
-     * @param string $label
+     * @param string|null $label
      * @param iterable $radios
      */
     public function __construct(string $label = null, iterable $radios = [])
@@ -46,9 +46,9 @@ class RadioGroup extends FormRadioGroup
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }

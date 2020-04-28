@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Mailery\Widget\Form\Renderers;
 
-use FormManager\Groups\RadioGroup as FormRadioGroup;
+use Mailery\Widget\Form\Groups\RadioGroup as FormRadioGroup;
 
 class RadioGroup
 {
@@ -30,21 +30,11 @@ class RadioGroup
     }
 
     /**
-     * @param bool $showErrors
      * @return string
      */
-    public function __invoke(bool $showErrors): string
+    public function __invoke(): string
     {
-        $placeholders = [
-            '{{ error }}' => '',
-        ];
-
-        $template = strtr(
-            '<div class="form-check">'
-                . '{{ input }} {{ label }} {{ error }}'
-            . '</div>',
-            $placeholders
-        );
+        $template = '<div class="form-check">{{ input }} {{ label }}</div>';
 
         foreach ($this->radioGroup as $radio) {
             $radio

@@ -55,12 +55,7 @@ class FormRenderer
                 $input = $inputRenderer($showErrors);
             }
 
-            $rows[] = strtr(
-                '<div class="row"><div class="col-md-12">{input}</div></div>',
-                [
-                    '{input}' => $input,
-                ]
-            );
+            $rows[] = '<div class="row"><div class="col-md-12">' . $input . '</div></div>';
         }
 
         return $this->form->getOpeningTag()
