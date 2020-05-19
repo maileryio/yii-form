@@ -34,10 +34,10 @@ class FormRenderer
     }
 
     /**
-     * @param bool $showErrors
+     * @param bool $submitted
      * @return string
      */
-    public function __invoke(bool $showErrors): string
+    public function __invoke(bool $submitted): string
     {
         $rows = [];
         foreach ($this->form as $input) {
@@ -52,7 +52,7 @@ class FormRenderer
             }
 
             if ($inputRenderer !== null) {
-                $input = $inputRenderer($showErrors);
+                $input = $inputRenderer($submitted);
             }
 
             $rows[] = '<div class="row"><div class="col-md-12">' . $input . '</div></div>';

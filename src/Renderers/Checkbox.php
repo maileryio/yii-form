@@ -15,15 +15,23 @@ namespace Mailery\Widget\Form\Renderers;
 class Checkbox extends Input
 {
     /**
-     * @param bool $showErrors
+     * @param bool $submitted
      * @return string
      */
-    public function __invoke(bool $showErrors): string
+    public function __invoke(bool $submitted): string
     {
-        if ($showErrors && ($error = $this->input->getError()) !== null) {
-            $error = '<div class="error mt-2 text-danger">' . $error . '</div>';
-        } else {
-            $error = '';
+        $error = '';
+        $inputClasses = [
+            'form-check-input',
+        ];
+
+        if ($submitted) {
+            if (($error = $this->input->getError()) !== null) {
+                $error = '<div class="error mt-2 text-danger">' . $error . '</div>';
+                $inputClasses[] = 'is-invalid';
+            } else {
+                $inputClasses[] = 'is-valid';
+            }
         }
 
         $template = '<div class="form-group row">'
@@ -35,6 +43,6 @@ class Checkbox extends Input
 
         return (string) $this->input
             ->setTemplate($template)
-            ->setAttribute('class', 'form-check-input');
+            ->setAttribute('class', implode(' ', $inputClasses));
     }
 }

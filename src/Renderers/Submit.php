@@ -12,24 +12,29 @@ declare(strict_types=1);
 
 namespace Mailery\Widget\Form\Renderers;
 
-class Submit extends Input
+use FormManager\Inputs\Submit as SubmitInput;
+
+class Submit
 {
     /**
-     * @param bool $showErrors
+     * @var SubmitInput
+     */
+    protected SubmitInput $input;
+
+    /**
+     * @param SubmitInput $input
+     */
+    public function __construct(SubmitInput $input)
+    {
+        $this->input = $input;
+    }
+
+    /**
      * @return string
      */
-    public function __invoke(bool $showErrors): string
+    public function __invoke(): string
     {
-        if ($showErrors && ($error = $this->input->getError()) !== null) {
-            $error = '<div class="error mt-2 text-danger">' . $error . '</div>';
-        } else {
-            $error = '';
-        }
-
-        $template = '{{ template }} ' . $error;
-
         return (string) $this->input
-            ->setTemplate($template)
             ->setAttribute('class', 'btn btn-primary float-right mt-2');
     }
 }
