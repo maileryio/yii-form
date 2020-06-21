@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Mailery\Widget\Form;
 
 use FormManager\Form;
+use FormManager\InputInterface;
 
 class FormRenderer
 {
@@ -34,25 +35,15 @@ class FormRenderer
     }
 
     /**
-     * @param bool $submitted
+     * @param bool $showErrors
      * @return string
      */
-    public function __invoke(bool $submitted): string
+    public function __invoke(bool $showErrors): string
     {
         $rows = [];
         foreach ($this->form as $input) {
-            $inputRenderer = null;
-            foreach (self::NAMESPACES as $namespace) {
-                $name = (new \ReflectionClass($input))->getShortName();
-                $class = $namespace . $name;
-
-                if (class_exists($class)) {
-                    $inputRenderer = new $class($input);
-                }
-            }
-
-            if ($inputRenderer !== null) {
-                $input = $inputRenderer($submitted);
+            if (($renderer = $this->resolveRenderer($input)) !== null) {
+                $input = $renderer($showErrors);
             }
 
             $rows[] = '<div class="row"><div class="col-md-12">' . $input . '</div></div>';
@@ -61,5 +52,27 @@ class FormRenderer
         return $this->form->getOpeningTag()
             . implode("\n", $rows)
             . $this->form->getClosingTag();
+    }
+
+    /**
+     * @param InputInterface $input
+     * @return callable|null
+     */
+    private function resolveRenderer(InputInterface $input): ?callable
+    {
+        if (method_exists($input, 'getRenderer')) {
+            return $input->getRenderer();
+        }
+
+        foreach (self::NAMESPACES as $namespace) {
+            $name = (new \ReflectionClass($input))->getShortName();
+            $class = $namespace . $name;
+
+            if (class_exists($class)) {
+                return new $class($input);
+            }
+        }
+
+        return null;
     }
 }
